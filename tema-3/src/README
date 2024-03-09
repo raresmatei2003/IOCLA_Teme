@@ -1,0 +1,67 @@
+Tema 3
+
+Matei Rares-Andrei
+315CC
+
+Timp implementare - 2 zile
+
+Rezolvare:
+
+Task 1:
+- extrag in ecx textul
+- parcurg litera cu litera textul si caut fiecare caracter folosind strchr
+in sirul "aeiou" pe care l-am retinut intr-o variabila globala
+- daca e vocala atunci introduc litera pe stiva
+- la fiecare pas cresc edx pentru a obtine lungimea textului
+- dupa ce am introdus toate vocalele pe stiva resetez ecx sa arate catre
+inceputul textului (scad din el edx)
+- parcurg iar textul litera cu litera si caut vocalele cu strchr
+- cand gasesc o vocala o inlocuiesc cu cea mai de sus de pe stiva (o scot
+cu pop)
+
+(tldr: parcurg textul de 2 ori, prima oara pun vocalele in stiva,
+a doua oara le scot si le pun in cuvant)
+
+Task 2:
+- parcurg textul cuvant cu cuvant
+- verific cu strcmp daca e ".."
+- daca e ".." atunci verific daca am cuvinte in path (variabila globala cuv
+sa fie > 0)
+- daca cuv > 0 atunci scot ultimul indice din stiva, altfel trec la urmatorul
+cuvant
+- daca e "." atunci nu fac nimic
+- daca nu e nici ".." nici "." atunci e cuvant si ii pun indicele in stiva
+- parcurg stiva de la coada la cap pentru a lua indicii in ordinea lor corecta
+- pun "/" la finalul path-ului cu strcat
+- pun cuvantul de la indicele scos din stiva la finalul path-ului cu strcat
+- cand termin de parcurs stiva mai pun un "/" cu strcat la finalul path-ului
+- scot de pe stiva cu pop indicii
+
+(tldr: pun in stiva indicii cuvintelor ce vor ajunge in path, daca intalnesc
+".." il scot pe ultimul, daca exista, daca intalnesc "." trec la urmatorul
+cuvant, nu e nici ".." nici "." deci e cuvant si ii bag indicele in stiva)
+
+Task 4:
+
+Ex 1 - parcurg recursiv arborele, daca pot sa merg in stanga atunci apelez
+functia pentru nodul din stanga, daca nu pun in array nodul curent si apoi
+verific daca pot sa merg in dreapta, caz in care apelez functia pentru nodul
+din dreapta 
+
+Ex 2 - folosesc aceeasi parcurgere de la ex 1 doar ca inainte de a merge in
+stanga sau dreapta verific daca nodul curent este frunza
+     - daca am nod in stanga atunci nodul curent nu este frunza deci nu este
+gresit si apelez functia pentru nodul din stanga
+     - fac acelasi proces dar pentru nodul din dreapta
+     - daca e frunza, atunci verific dara are tata
+     - daca are tata atunci verific daca este fiul din stanga sau dreapta
+     - daca este fiul din stanga atunci verific daca este mai mic decat tatal,
+caz in care pot sa ies din functie, altfel introduc nodul curent in array
+     - daca este fiul din dreapta atunci verific daca este mai mare decat
+tatal, caz in care pot sa ies din functie, altfel introduc nodul curent in
+array
+
+Ex 3 - folosesc acelasi algoritm de la ex 2 doar ca in loc de a pune in array
+nodul incorect ii modific valoarea conform cerintei (fiul din stanga care e 
+mai mare decat tatal primeste valoarea tatalui - 1, fiul din dreapta care
+e mai mic decat tatal primeste valoarea tatalui + 1)
